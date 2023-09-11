@@ -90,6 +90,16 @@ const App = () => {
     }
   };
 
+  const handleRemove = async (blog) => {
+    try {
+      const response = await blogService.remove(blog);
+      const newBlogs = await blogService.getAll();
+      setBlogs(newBlogs);
+    } catch (error) {
+      console.log('error', error.response.data.error);
+    }
+  };
+
   if (user === null) {
     return (
       <div>
@@ -113,7 +123,13 @@ const App = () => {
       </h2>
       {BlogForm()}
       {sortedblogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          updateBlog={updateBlog}
+          remove={handleRemove}
+          user={user.username}
+        />
       ))}
     </div>
   );
