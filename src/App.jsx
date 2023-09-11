@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Blog from './components/Blog';
 import blogService from './services/blogs';
 import loginService from './services/login';
+import NewBlogForm from './components/newBlogForm';
+import Togglable from './components/togglable';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -68,6 +70,10 @@ const App = () => {
     setURL('');
   };
 
+  const handleTitleChange = ({ target }) => setTitle(target.value);
+  const handleAuthorChange = ({ target }) => setAuthor(target.value);
+  const handleUrlChange = ({ target }) => setURL(target.value);
+
   const successMessage = (message) => {
     setSuccessNotification(message);
     setTimeout(() => {
@@ -120,39 +126,17 @@ const App = () => {
       <h2>
         {user.name} logged in <button onClick={handleLogout}>logout</button>
       </h2>
-
-      <h1>Create new</h1>
-      <form onSubmit={handleCreate}>
-        <div>
-          <label htmlFor="title">title</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={({ target }) => setTitle(target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="author">author</label>
-          <input
-            type="text"
-            id="author"
-            value={author}
-            onChange={({ target }) => setAuthor(target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="url">url</label>
-          <input
-            type="text"
-            id="url"
-            value={url}
-            onChange={({ target }) => setURL(target.value)}
-          />
-        </div>
-        <button type="submit">create</button>
-      </form>
-
+      <Togglable label="New Blog">
+        <NewBlogForm
+          handleCreate={handleCreate}
+          title={title}
+          author={author}
+          url={url}
+          handleTitleChange={handleTitleChange}
+          handleAuthorChange={handleAuthorChange}
+          handleUrlChange={handleUrlChange}
+        />
+      </Togglable>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
