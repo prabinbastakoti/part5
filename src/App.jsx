@@ -66,7 +66,7 @@ const App = () => {
 
   const BlogForm = () => {
     return (
-      <Togglable label="New Blog">
+      <Togglable label="Create new Blog">
         <NewBlogForm handleCreate={handleCreate} />
       </Togglable>
     );
