@@ -36,14 +36,16 @@ const Blog = ({ blog, updateBlog, remove, user }) => {
       <div className="details">
         {blog.title} {blog.author}
       </div>
-      <button onClick={() => setShowDetails(!showDetails)}>
+      <button onClick={() => setShowDetails(!showDetails)} className="showBtn">
         {showDetails ? 'hide' : 'show'}
       </button>
       <div style={showWhenVisible} className="showWhenVisible">
         <div>{blog.url}</div>
         <div>
           {blog.likes}
-          <button onClick={increaseLike}>like</button>
+          <button onClick={increaseLike} className="likeBtn">
+            like
+          </button>
         </div>
         <div>{blog.author}</div>
         {user === blog.user.username && (
