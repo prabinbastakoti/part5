@@ -45,8 +45,9 @@ const App = () => {
   };
 
   const handleCreate = async (object) => {
-    const response = await blogService.create(object);
-    setBlogs(blogs.concat(response));
+    await blogService.create({ ...object });
+    const newBlogs = await blogService.getAll();
+    setBlogs(newBlogs);
     successMessage(`a new blog ${object.title} added`);
   };
 
@@ -73,11 +74,7 @@ const App = () => {
   };
 
   const LoginFormFunction = () => {
-    return (
-      <Togglable label="Login">
-        <LoginForm handleSubmit={handleSubmit} />
-      </Togglable>
-    );
+    return <LoginForm handleSubmit={handleSubmit} />;
   };
 
   const updateBlog = async (blog) => {

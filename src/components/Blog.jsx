@@ -42,7 +42,7 @@ const Blog = ({ blog, updateBlog, remove, user }) => {
       <div style={showWhenVisible} className="showWhenVisible">
         <div>{blog.url}</div>
         <div>
-          {blog.likes}
+          <div id="likesCount">{blog.likes}</div>
           <button onClick={increaseLike} className="likeBtn">
             like
           </button>
