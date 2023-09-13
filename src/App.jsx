@@ -120,13 +120,15 @@ const App = () => {
       </h2>
       {BlogForm()}
       {sortedblogs.map((blog) => (
-        <Blog
-          key={blog.id}
-          blog={blog}
-          updateBlog={updateBlog}
-          remove={handleRemove}
-          user={user.username}
-        />
+        <div className="blog">
+          <Blog
+            key={blog.id}
+            blog={blog}
+            updateBlog={updateBlog}
+            remove={handleRemove}
+            user={user.username}
+          />
+        </div>
       ))}
     </div>
   );
